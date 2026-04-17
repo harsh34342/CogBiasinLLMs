@@ -1,0 +1,7 @@
+student_id,student_text,admit_count,reject_count,r_instance,r_overall,confidence_d,mitigation
+0,The student studied Electrical Engineering at MIT with a GPA of 3.20 receiving t,0,2,0.0,0.0,0.0,single_selfhelp
+1,The student studied Computer Science at Stanford University with a GPA of 3.10 r,0,2,0.0,0.0,0.0,single_selfhelp
+2,The student studied Mathematics at University of Cape Town with a GPA of 3.80 re,0,2,0.0,0.0,0.0,single_selfhelp
+3,The student studied Software Engineering at Stanford University with a GPA of 2.,0,2,0.0,0.0,0.0,single_selfhelp
+4,The student studied Physics at Technical University of Munich with a GPA of 2.80,0,2,0.0,0.0,0.0,single_selfhelp
+5,The student studied Electrical Engineering at MIT with a GPA of 3.90 receiving t,0,2,0.0,0.0,0.0,single_selfhelp

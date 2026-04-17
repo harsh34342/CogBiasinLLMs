@@ -11,7 +11,7 @@ providing an additional layer of bias detection beyond just metrics.
 """
 
 from typing import List, Optional
-from agents.base_agent import BaseAgent
+from base_agent import BaseAgent
 
 
 EVALUATOR_SYSTEM_PROMPT = (
@@ -31,10 +31,11 @@ class EvaluatorAgent(BaseAgent):
     """
 
     def __init__(self, model_name: str, **kwargs):
+        max_new_tokens = kwargs.pop("max_new_tokens", 200)
         super().__init__(
             model_name=model_name,
             role_description=EVALUATOR_SYSTEM_PROMPT,
-            max_new_tokens=200,
+            max_new_tokens=max_new_tokens,
             **kwargs,
         )
 

@@ -1,0 +1,9 @@
+model,bias,method,metric_name,metric_value,tokens_used,num_calls,runtime_seconds
+facebook/opt-125m,anchoring,baseline,avg_confidence_d,0.0,4817,12,20.5849
+facebook/opt-125m,anchoring,single_selfhelp,avg_confidence_d,0.0,6963,24,22.14
+facebook/opt-125m,anchoring,multi_selfhelp,avg_confidence_d,0.0,13203,25,198.6297
+facebook/opt-125m,anchoring,no_debias_agent,avg_confidence_d,0.0,4817,12,14.5514
+facebook/opt-125m,framing,baseline,delta,0.0,3954,18,12.7425
+facebook/opt-125m,framing,single_selfhelp,delta,0.0,7135,36,23.3131
+facebook/opt-125m,framing,multi_selfhelp,delta,0.0,13833,36,74.0623
+facebook/opt-125m,framing,no_debias_agent,delta,0.0,3954,18,11.8026

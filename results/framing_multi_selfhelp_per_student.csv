@@ -1,0 +1,4 @@
+student_id,student_text,raw_admit,decision_admit,parse_ok_admit,raw_reject,decision_reject,parse_ok_reject,raw_neutral,decision_neutral,parse_ok_neutral,mitigation
+0,The student studied Electrical Engineering at MIT with a GPA of 3.20 receiving t,The student studied Electrical Engineering at MIT,,False,[end of prompt],,False,"147, Quantitative: 151, Analy",,False,multi_selfhelp
+1,The student studied Computer Science at Stanford University with a GPA of 3.10 r,The student studied Computer Science at Stanford,,False,The student studied Computer Science at Stanford,,False,The student studied Computer Science at Stanford,,False,multi_selfhelp
+2,The student studied Mathematics at University of Cape Town with a GPA of 3.80 re,The student studied Mathematics at University of,,False,The student studied Mathematics at University of,,False,The student studied Mathematics at University of,,False,multi_selfhelp

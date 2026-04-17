@@ -21,7 +21,7 @@ Multi-Agent Pipeline:
 import argparse
 import logging
 import os
-import sys
+import time
 
 # ── Logging setup ─────────────────────────────────────────────────────────────
 logging.basicConfig(
@@ -50,7 +50,17 @@ def parse_args():
     )
     parser.add_argument(
         "--mitigation",
-        choices=["baseline", "awareness", "contrastive", "counterfactual", "selfhelp", "all"],
+        choices=[
+            "baseline",
+            "awareness",
+            "contrastive",
+            "counterfactual",
+            "selfhelp",
+            "single_selfhelp",
+            "multi_selfhelp",
+            "no_debias_agent",
+            "all",
+        ],
         default="all",
         help="Mitigation strategy to run (default: all)",
     )
@@ -70,14 +80,43 @@ def parse_args():
         default=None,
         help="HuggingFace token (for gated models like Llama-2)",
     )
+    parser.add_argument(
+        "--n-students",
+        type=int,
+        default=None,
+        help="Override student count for both anchoring and framing",
+    )
+    parser.add_argument(
+        "--n-permutations",
+        type=int,
+        default=None,
+        help="Override anchoring order permutations",
+    )
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=None,
+        help="Override random seed",
+    )
+    parser.add_argument(
+        "--temperature",
+        type=float,
+        default=None,
+        help="Override model temperature (default from config)",
+    )
+    parser.add_argument(
+        "--log-cost",
+        action="store_true",
+        help="Write per-condition model-call and token usage logs",
+    )
     return parser.parse_args()
 
 
 def build_agents(model_name: str, hf_token=None, use_evaluator: bool = True):
     """Instantiate all three agents sharing the same model."""
-    from agents.decision_agent import DecisionAgent
-    from agents.debiasing_agent import DebiasingAgent
-    from agents.evaluator_agent import EvaluatorAgent
+    from decision_agent import DecisionAgent
+    from debiasing_agent import DebiasingAgent
+    from evaluator_agent import EvaluatorAgent
     import config
 
     token = hf_token or config.HF_TOKEN
@@ -96,7 +135,6 @@ def build_agents(model_name: str, hf_token=None, use_evaluator: bool = True):
     debiasing_agent = DebiasingAgent(
         model_name=model_name,
         device=config.DEVICE,
-        max_new_tokens=256,
         temperature=config.TEMPERATURE,
         hf_token=token,
     )
@@ -106,7 +144,6 @@ def build_agents(model_name: str, hf_token=None, use_evaluator: bool = True):
         evaluator_agent = EvaluatorAgent(
             model_name=model_name,
             device=config.DEVICE,
-            max_new_tokens=200,
             temperature=config.TEMPERATURE,
             hf_token=token,
         )
@@ -130,8 +167,8 @@ def run_anchoring(
     model_name: str,
 ):
     """Run the full anchoring bias experiment."""
-    from biases.anchoring import AnchoringExperiment
-    from data.student_profiles import generate_sequential_student_set
+    from anchoring import AnchoringExperiment
+    from student_profiles import generate_sequential_student_set
     from evaluate import compare_mitigations, save_results_csv, save_per_student_csv
     from visualize import (
         plot_anchoring_confidence, plot_per_student_confidence, print_results_table
@@ -206,8 +243,8 @@ def run_framing(
     model_name: str,
 ):
     """Run the full framing bias experiment."""
-    from biases.framing import FramingExperiment
-    from data.student_profiles import generate_student_profiles
+    from framing import FramingExperiment
+    from student_profiles import generate_student_profiles
     from evaluate import compare_mitigations, save_results_csv, save_per_student_csv
     from visualize import plot_framing_delta, print_results_table
 
@@ -271,6 +308,15 @@ def main():
 
     if args.hf_token:
         config.HF_TOKEN = args.hf_token
+    if args.temperature is not None:
+        config.TEMPERATURE = args.temperature
+    if args.n_students is not None:
+        config.NUM_STUDENTS_ANCHORING = args.n_students
+        config.NUM_STUDENTS_FRAMING = args.n_students
+    if args.n_permutations is not None:
+        config.NUM_ORDER_PERMUTATIONS = args.n_permutations
+    if args.seed is not None:
+        config.RANDOM_SEED = args.seed
 
     mitigations = (
         config.MITIGATIONS_TO_RUN
@@ -300,8 +346,55 @@ def main():
 
     # ── Run experiments ────────────────────────────────────────────────────────
     all_results = {}
+    cost_rows = []
+
+    def _reset_agent_stats():
+        for agent in (decision_agent, debiasing_agent, evaluator_agent):
+            if agent and hasattr(agent, "reset_usage_stats"):
+                agent.reset_usage_stats()
+
+    def _collect_cost_rows(bias_name: str, mitigation: str, wall_runtime: float):
+        agent_map = {
+            "decision": decision_agent,
+            "debiasing": debiasing_agent,
+            "evaluator": evaluator_agent,
+        }
+        total_tokens = 0
+        total_calls = 0
+        for role, agent in agent_map.items():
+            if not agent or not hasattr(agent, "get_usage_stats"):
+                continue
+            stats = agent.get_usage_stats()
+            total_role_tokens = stats["input_tokens"] + stats["output_tokens"]
+            total_tokens += total_role_tokens
+            total_calls += stats["num_calls"]
+            cost_rows.append({
+                "bias": bias_name,
+                "mitigation": mitigation,
+                "agent_role": role,
+                "num_calls": stats["num_calls"],
+                "input_tokens": stats["input_tokens"],
+                "output_tokens": stats["output_tokens"],
+                "tokens_used": total_role_tokens,
+                "runtime_seconds": round(stats["runtime_seconds"], 4),
+                "wall_runtime_seconds": round(wall_runtime, 4),
+            })
+        cost_rows.append({
+            "bias": bias_name,
+            "mitigation": mitigation,
+            "agent_role": "total",
+            "num_calls": total_calls,
+            "input_tokens": "",
+            "output_tokens": "",
+            "tokens_used": total_tokens,
+            "runtime_seconds": "",
+            "wall_runtime_seconds": round(wall_runtime, 4),
+        })
 
     if "anchoring" in run_biases:
+        if args.log_cost and len(mitigations) == 1:
+            _reset_agent_stats()
+            start = time.perf_counter()
         all_results["anchoring"] = run_anchoring(
             decision_agent=decision_agent,
             debiasing_agent=debiasing_agent,
@@ -313,8 +406,17 @@ def main():
             results_dir=results_dir,
             model_name=model_name,
         )
+        if args.log_cost and len(mitigations) == 1:
+            _collect_cost_rows(
+                bias_name="anchoring",
+                mitigation=mitigations[0],
+                wall_runtime=time.perf_counter() - start,
+            )
 
     if "framing" in run_biases:
+        if args.log_cost and len(mitigations) == 1:
+            _reset_agent_stats()
+            start = time.perf_counter()
         all_results["framing"] = run_framing(
             decision_agent=decision_agent,
             debiasing_agent=debiasing_agent,
@@ -325,6 +427,17 @@ def main():
             results_dir=results_dir,
             model_name=model_name,
         )
+        if args.log_cost and len(mitigations) == 1:
+            _collect_cost_rows(
+                bias_name="framing",
+                mitigation=mitigations[0],
+                wall_runtime=time.perf_counter() - start,
+            )
+
+    if args.log_cost and cost_rows:
+        from evaluate import save_results_csv
+        save_results_csv(cost_rows, os.path.join(results_dir, "cost_summary.csv"))
+        logger.info("Saved cost summary to results/cost_summary.csv")
 
     logger.info(f"\nAll results saved to: {os.path.abspath(results_dir)}/")
     logger.info("Done.")

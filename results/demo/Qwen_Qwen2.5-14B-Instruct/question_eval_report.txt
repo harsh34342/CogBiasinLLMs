@@ -1,0 +1,21 @@
+=== DIRECT QUESTION OUTPUT ===
+Q1 (multi-agent vs single-agent self-help): INCONCLUSIVE (missing rows)
+Q2 (architecture ablation, multi vs no_debias): INCONCLUSIVE (missing rows)
+
+Q1 detail
+- anchoring: missing data
+- framing: missing data
+
+Q2 detail
+- anchoring: missing data
+- framing: missing data
+
+=== DIAGNOSTICS ===
+- [coverage] anchoring: missing methods -> ['baseline', 'multi_selfhelp', 'no_debias_agent', 'single_selfhelp']
+- [coverage] framing: missing methods -> ['multi_selfhelp', 'no_debias_agent', 'single_selfhelp']
+- [signal] framing: all metric values identical (0.000000)
+- [signal] all metric values are 0.0 -> likely weak model signal or parse-limited outputs
+
+=== COST SNAPSHOT (mean by bias/method) ===
+   bias   method  tokens_used  num_calls  runtime_seconds
+framing baseline          0.0        0.0              0.0

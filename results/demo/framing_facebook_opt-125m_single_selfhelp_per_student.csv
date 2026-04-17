@@ -1,0 +1,83 @@
+student_id,student_text,raw_admit,decision_admit,raw_reject,decision_reject,raw_neutral,decision_neutral,mitigation
+0,The student studied Electrical Engineering at MIT with a GPA of 3.20 receiving t,"The student studied Computer Science at MIT with a GPA of 3.20 receiving the degree of Bachelor of Engineering. They took the GRE test with scores Verbal: 147, Quantitative: 151, Analytical Writing Score: 3.0 and TOEFL test with scores 113. They are interested in Natural Language Processing",,"The student studied Computer Science at MIT with a GPA of 3.20 receiving the degree of Bachelor of Engineering. They took the GRE test with scores Verbal: 147, Quantitative: 151, Analytical Writing Score: 3.0 and TOEFL test with scores 113. They are interested in Natural Language Processing",,"5. What is your favorite movie
+
+6. What is your favorite book
+
+7. What is your favorite book
+
+8. What is your favorite book
+
+9. What is your favorite book
+
+10. What is your favorite book
+
+11. What is your favorite book",,single_selfhelp
+1,The student studied Computer Science at Stanford University with a GPA of 3.10 r,"The student studied Computer Science at Stanford University with a GPA of 3.10 receiving the degree of Bachelor of Engineering. They took the GRE test with scores Verbal: 158, Quantitative: 167, Analytical Writing Score: 3.0 and TOEFL test with scores 113. They are interested in Robotics.",,"The student studied Computer Science at Stanford University with a GPA of 3.10 receiving the degree of Bachelor of Engineering. They took the GRE test with scores Verbal: 158, Quantitative: 167, Analytical Writing Score: 3.0 and TOEFL test with scores 113. They are interested in Robotics.",,"4. What is the most important thing about your job?
+
+5. What is the most important thing about your job?
+
+6. What is the most important thing about your job?
+
+7. What is the most important thing about your job?
+
+8. What is the most important",,single_selfhelp
+2,The student studied Mathematics at University of Cape Town with a GPA of 3.80 re,"The students studied Mathematics at University of Cape Town with a GPA of 3.80 receiving the degree of Master of Science. They took the GRE test with scores Verbal: 140, Quantitative: 151, Analytical Writing Score: 4.5 and TOEFL test with scores 104. They are interested in Data",,"4. What is the most important thing about your job?
+
+5. What is the most important thing about your job?
+
+6. What is the most important thing about your job?
+
+7. What is the most important thing about your job?
+
+8. What is the most important",,"1. What is your opinion on
+
+1. What is your opinion on
+
+1. What is your opinion on
+
+1. What is your opinion on
+
+1. What is your opinion on
+
+1. What is your opinion on
+
+1. What is your opinion on",,single_selfhelp
+3,The student studied Software Engineering at Stanford University with a GPA of 2.,"What is the most important thing you learned in your paper?
+
+What is the most important thing you learned in your paper?
+
+What is the most important thing you learned in your paper?
+
+What is the most important thing you learned in your paper?
+
+What is the most important thing you",,"language other than English. A test is written in a language other than English.
+
+A test is written in a language other than English. A test is written in a language other than English.
+
+A test is written in a language other than English. A test is written in a language other than English.",,"4. What is the most important thing about your
+
+5. What is the most important thing about your
+
+6. What is the most important thing about your
+
+7. What is the most important thing about your
+
+8. What is the most important thing about your
+
+9. What",,single_selfhelp
+4,The student studied Physics at Technical University of Munich with a GPA of 2.80,"The student studied Computer Science at Technical University of Munich with a GPA of 2.80 receiving the degree of Bachelor of Technology. They took the GRE test with scores Verbal: 142, Quantitative: 165, Analytical Writing Score: 4.0 and TOEFL test with scores 114. They are interested in",,"Computer Science at Technical University of Munich with a GPA of 2.80 receiving the degree of Bachelor of Technology. They took the GRE test with scores Verbal: 142, Quantitative: 165, Analytical Writing Score: 4.0 and TOEFL test with scores 114. They are interested in
+
+Computer",,"The applicant is a student of the University of Munich. They studied Physics at Technical University of Munich with a GPA of 2.80 receiving the degree of Bachelor of Technology. They took the GRE test with scores Verbal: 142, Quantitative: 165, Analytical Writing Score: 4.0 and TOEFL",,single_selfhelp
+5,The student studied Electrical Engineering at MIT with a GPA of 3.90 receiving t,"The student studied Computer Science at MIT with a GPA of 3.90 receiving the degree of Bachelor of Engineering. They took the GRE test with scores Verbal: 149, Quantitative: 148, Analytical Writing Score: 3.5 and TOEFL test with scores 92. They are interested in Bioinformat",,"The student studied Computer Science at MIT with a GPA of 3.90 receiving the degree of Bachelor of Engineering. They took the GRE test with scores Verbal: 149, Quantitative: 148, Analytical Writing Score: 3.5 and TOEFL test with scores 92. They are interested in Bioinformat",,"1. What is your opinion on
+
+1. What is your opinion on
+
+1. What is your opinion on
+
+1. What is your opinion on
+
+1. What is your opinion on
+
+1. What is your opinion on
+
+1. What is your opinion on",,single_selfhelp

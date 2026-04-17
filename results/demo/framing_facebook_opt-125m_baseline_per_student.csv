@@ -1,0 +1,43 @@
+student_id,student_text,raw_admit,decision_admit,raw_reject,decision_reject,raw_neutral,decision_neutral,mitigation
+0,The student studied Electrical Engineering at MIT with a GPA of 3.20 receiving t,"Yes, I will admit this student.
+
+I am a Computer Science student. I am studying Computer Science at a large US university for a computer science program. You are going to read applications from students and decide if they should get admitted or not. In general, around 30 out of 100 applicants get admitted.",admit,"I am a Computer Science student at a large US university for a computer science program. You are going to read applications from students and decide if they should get admitted or not. In general, around 30 out of 100 applicants get admitted. Do not summarize the information given but answer with only one word: admit or reject",admit,"I am a Computer Science student. I am studying Computer Science at MIT with a GPA of 3.20 receiving the degree of Bachelor of Engineering. They took the GRE test with scores Verbal: 147, Quantitative: 151, Analytical Writing Score: 3.0 and TOEFL test with scores 113.",,baseline
+1,The student studied Computer Science at Stanford University with a GPA of 3.10 r,"Yes, I will admit this student.
+
+I am a Computer Science student at a large US university for a computer science program. You are going to read applications from students and decide if they should get admitted or not. In general, around 30 out of 100 applicants get admitted. Do not summarize the information given",admit,"If you are interested in Computer Science, you can apply for Computer Science at Stanford University.
+
+If you are interested in Computer Science, you can apply for Computer Science at Stanford University.
+
+If you are interested in Computer Science, you can apply for Computer Science at Stanford University.
+
+If you are",,I am a Computer Science student. I am studying Computer Science at Stanford University. I am studying Computer Science at Stanford University. I am studying Computer Science at Stanford University. I am studying Computer Science at Stanford University. I am studying Computer Science at Stanford University. I am studying Computer Science at Stanford University. I am,,baseline
+2,The student studied Mathematics at University of Cape Town with a GPA of 3.80 re,"Yes, I will admit this student.
+
+I am a Computer Science student. I am studying Computer Science at University of Cape Town with a GPA of 3.80 receiving the degree of Master of Science. They took the GRE test with scores Verbal: 140, Quantitative: 151, Analytical Writing Score",admit,"I am a Computer Science student. I am studying Computer Science at University of Cape Town with a GPA of 3.80 receiving the degree of Master of Science. They took the GRE test with scores Verbal: 140, Quantitative: 151, Analytical Writing Score: 4.5 and TOEFL test with",,"I am a Computer Science student. I am studying Computer Science at University of Cape Town with a GPA of 3.80 receiving the degree of Master of Science. They took the GRE test with scores Verbal: 140, Quantitative: 151, Analytical Writing Score: 4.5 and TOEFL test with",,baseline
+3,The student studied Software Engineering at Stanford University with a GPA of 2.,"Yes, I will admit this student.
+
+I am a Computer Science student at a large US university for a computer science program. You are going to read applications from students and decide if they should get admitted or not. In general, around 30 out of 100 applicants get admitted. Do not summarize the information given",admit,"Yes, I will.
+
+I am not sure if you are a computer science student or not.
+
+I am a computer science student.
+
+I am a computer science student.
+
+I am a computer science student.
+
+I am a computer science student.
+
+I am a computer",,I am a Computer Science student. I am studying Computer Science at Stanford University. I am studying Computer Science at Stanford University. I am studying Computer Science at Stanford University. I am studying Computer Science at Stanford University. I am studying Computer Science at Stanford University. I am studying Computer Science at Stanford University. I am,,baseline
+4,The student studied Physics at Technical University of Munich with a GPA of 2.80,"Yes, I will admit this student.
+
+I am a Computer Science student. I am studying Computer Science at Technical University of Munich with a GPA of 2.80 receiving the degree of Bachelor of Technology. They took the GRE test with scores Verbal: 142, Quantitative: 165, Analytical Writing Score",admit,"If you are interested in applying for Computer Science at a large US university, you can apply for Computer Science at a large US university.
+
+You can apply for Computer Science at a large US university.
+
+You can apply for Computer Science at a large US university.
+
+You can apply for Computer Science",,"I am a Computer Science student. I am studying Computer Science at Technical University of Munich with a GPA of 2.80 receiving the degree of Bachelor of Technology. They took the GRE test with scores Verbal: 142, Quantitative: 165, Analytical Writing Score: 4.0 and TOEFL test with",,baseline
+5,The student studied Electrical Engineering at MIT with a GPA of 3.90 receiving t,"Yes, I will admit this student.
+
+I am a Computer Science student. I am studying Computer Science at MIT with a GPA of 3.90 receiving the degree of Bachelor of Engineering. They took the GRE test with scores Verbal: 149, Quantitative: 148, Analytical Writing Score: 3.",admit,"I am a Computer Science student at a large US university for a computer science program. You are going to read applications from students and decide if they should get admitted or not. In general, around 30 out of 100 applicants get admitted. Do not summarize the information given but answer with only one word: admit or reject",admit,"I am a Computer Science student. I am studying Computer Science at MIT with a GPA of 3.90 receiving the degree of Bachelor of Engineering. They took the GRE test with scores Verbal: 149, Quantitative: 148, Analytical Writing Score: 3.5 and TOEFL test with scores 92.",,baseline

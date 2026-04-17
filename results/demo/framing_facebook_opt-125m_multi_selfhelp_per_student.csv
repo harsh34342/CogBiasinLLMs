@@ -1,0 +1,50 @@
+student_id,student_text,raw_admit,decision_admit,raw_reject,decision_reject,raw_neutral,decision_neutral,mitigation
+0,The student studied Electrical Engineering at MIT with a GPA of 3.20 receiving t,"The student studied Electrical Engineering at MIT with a GPA of 3.20 receiving the degree of Bachelor of Engineering. They took the GRE test with scores Verbal: 147, Quantitative: 151, Analytical Writing Score: 3.0 and TOEFL
+
+The student studied Electrical Engineering at MIT with a GPA",,"[end of prompt]
+
+[end of prompt]
+
+[end of prompt]
+
+[end of prompt]
+
+[end of prompt]
+
+[end of prompt]
+
+[end of prompt]
+
+[end of prompt]
+
+[end of prompt]",,"147, Quantitative: 151, Analytical Writing Score: 3.0 and TOEFL test with scores 113. They are interested in Natural Language Processing. They are from Japan. They have an evaluation of 9/10 for reference letters.
+What is your decision for this applicant? Answer admit or reject.",admit,multi_selfhelp
+1,The student studied Computer Science at Stanford University with a GPA of 3.10 r,"The student studied Computer Science at Stanford University with a GPA of 3.10 receiving the degree of Bachelor of Engineering. They took the GRE test with scores Verbal: 158, Quantitative: 167, Analytical Writing Score: 3.0 and TOEFL test
+
+The student studied Computer Science at Stanford University",,"The student studied Computer Science at Stanford University with a GPA of 3.10 receiving the degree of Bachelor of Engineering. They took the GRE test with scores Verbal: 158, Quantitative: 167, Analytical Writing Score: 3.0 and TOEFL test with scores 113. They are interested in Robotics.",,"The student studied Computer Science at Stanford University with a GPA of 3.10 receiving the degree of Bachelor of Engineering. They took the GRE test with scores Verbal: 158, Quantitative: 167
+
+The student studied Computer Science at Stanford University with a GPA of 3.10 receiving the degree of Bachelor of Engineering",,multi_selfhelp
+2,The student studied Mathematics at University of Cape Town with a GPA of 3.80 re,"The student studied Mathematics at University of Cape Town with a GPA of 3.80 receiving the degree of Master of Science. They took the GRE test with scores Verbal: 140, Quantitative: 151, Analytical Writing Score: 4.5
+
+The student studied Mathematics at University of Cape Town with a GPA",,"The student studied Mathematics at University of Cape Town with a GPA of 3.80 receiving the degree of Master of Science. They took the GRE test with scores Verbal: 140, Quant
+
+The student studied Mathematics at University of Cape Town with a GPA of 3.80 receiving the degree of Master of Science.",,"The student studied Mathematics at University of Cape Town with a GPA of 3.80 receiving the degree of Master of Science. They took the GRE test with scores Verbal: 140
+
+The student studied Mathematics at University of Cape Town with a GPA of 3.80 receiving the degree of Master of Science. They took",,multi_selfhelp
+3,The student studied Software Engineering at Stanford University with a GPA of 2.,"The student studied Software Engineering at Stanford University with a GPA of 2.80 receiving the degree of Bachelor of Technology. They took the GRE test with scores Verbal: 142, Quantitative: 160, Analytical Writing Score: 4.0 and TOEFL test with scores 114. They are interested in Data Analytics",,"of Bachelor of Technology. They took the GRE test with scores Verbal: 142, Quantitative: 160, Analytical Writing Score: 4.0 and TOEFL test with scores 114. They are interested in Data Analytics. They are from Germany. They have an evaluation of 6/10 for reference letters.",,"The student studied Software Engineering at Stanford University with a GPA of 2.80 receiving the degree of Bachelor of Technology. They took the GRE test with scores Verbal: 142, Quantitative
+
+The student studied Software Engineering at Stanford University with a GPA of 2.80 receiving the degree of Bachelor of Technology. They",,multi_selfhelp
+4,The student studied Physics at Technical University of Munich with a GPA of 2.80,"The student studied Physics at Technical University of Munich with a GPA of 2.80 receiving the degree of Bachelor of Technology. They took the GRE test with scores Verbal: 142, Quantitative: 165, Analytical Writing Score: 4.0
+
+The student studied Physics at Technical University of Munich with a GPA",,"The student studied Physics at Technical University of Munich with a GPA of 2.80 receiving the degree of Bachelor of Technology. They took the GRE test with scores Verbal: 142, Quant
+
+The student studied Physics at Technical University of Munich with a GPA of 2.80 receiving the degree of Bachelor of Technology.",,"The student studied Physics at Technical University of Munich with a GPA of 2.80 receiving the degree of Bachelor of Technology. They took the GRE test with scores Verbal: 142
+
+The student studied Physics at Technical University of Munich with a GPA of 2.80 receiving the degree of Bachelor of Technology. They took",,multi_selfhelp
+5,The student studied Electrical Engineering at MIT with a GPA of 3.90 receiving t,"The student studied Electrical Engineering at MIT with a GPA of 3.90 receiving the degree of Bachelor of Engineering. They took the GRE test with scores Verbal: 149, Quantitative: 148, Analytical Writing Score: 3.5 and TO
+
+The student studied Electrical Engineering at MIT with a GPA of 3",,"149, Quantitative: 148, Analytical Writing Score: 3.5 and TOEFL test with scores 92. They are interested in Bioinformatics. They are from USA. They have an evaluation of 8/10 for reference letters.
+Will you reject this student?
+[end of prompt]",reject,"The student studied Electrical Engineering at MIT with a GPA of 3.90 receiving the degree of Bachelor of Engineering. They took the GRE test with scores Verbal: 149, Quant
+
+The student studied Electrical Engineering at MIT with a GPA of 3.90 receiving the degree of Bachelor of Engineering. They took the GRE",,multi_selfhelp

@@ -1,0 +1,9 @@
+bias,method,baseline_bias_score,method_bias_score,bias_reduction_pct,baseline_tokens,method_tokens,cost_increase_pct
+anchoring,baseline,1.0,1.0,0.0,4817,4817,0.0
+anchoring,single_selfhelp,1.0,1.0,0.0,4817,6963,44.5506
+anchoring,multi_selfhelp,1.0,1.0,0.0,4817,13203,174.0918
+anchoring,no_debias_agent,1.0,1.0,0.0,4817,4817,0.0
+framing,baseline,0.0,0.0,0.0,3954,3954,0.0
+framing,single_selfhelp,0.0,0.0,0.0,3954,7135,80.4502
+framing,multi_selfhelp,0.0,0.0,0.0,3954,13833,249.8483
+framing,no_debias_agent,0.0,0.0,0.0,3954,3954,0.0

@@ -13,7 +13,7 @@ Mirrors the Self-Help method from BiasBuster Section 4.3.
 """
 
 import re
-from agents.base_agent import BaseAgent
+from base_agent import BaseAgent
 
 
 DEBIASING_SYSTEM_PROMPT = (
@@ -43,10 +43,11 @@ class DebiasingAgent(BaseAgent):
     """
 
     def __init__(self, model_name: str, **kwargs):
+        max_new_tokens = kwargs.pop("max_new_tokens", 256)
         super().__init__(
             model_name=model_name,
             role_description=DEBIASING_SYSTEM_PROMPT,
-            max_new_tokens=256,  # rewrites need more tokens
+            max_new_tokens=max_new_tokens,
             **kwargs,
         )
 

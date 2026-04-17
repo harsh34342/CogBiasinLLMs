@@ -13,7 +13,7 @@ Edit MODEL_NAME and EXPERIMENT settings before running.
 # For quick testing use "facebook/opt-125m"
 # For paper-comparable results use "mistralai/Mistral-7B-Instruct-v0.2"
 #   or "meta-llama/Llama-2-7b-chat-hf" (requires HF token)
-MODEL_NAME = "facebook/opt-1.3b"
+MODEL_NAME = "mistralai/Mistral-7B-Instruct-v0.2"
 
 # If using Llama-2 (gated model), set your HuggingFace token here or via env var:
 # export HUGGINGFACE_TOKEN=hf_your_token_here
@@ -34,10 +34,10 @@ TEMPERATURE = 0.0   # deterministic for reproducibility
 
 # Number of student profiles to use per experiment
 # Paper used 5449 anchoring prompts; start small for testing
-NUM_STUDENTS_ANCHORING = 10     # number of unique students in a sequence
+NUM_STUDENTS_ANCHORING = 50     # number of unique students in a sequence
 NUM_ORDER_PERMUTATIONS = 6      # how many order shuffles to test (paper: all permutations)
 
-NUM_STUDENTS_FRAMING = 20       # number of student profiles for framing test
+NUM_STUDENTS_FRAMING = 50       # number of student profiles for framing test
 FRAMING_REPEATS = 1             # repeats per student (paper used 1)
 
 # Typical admission rate (from paper: 30%)
@@ -53,10 +53,9 @@ RANDOM_SEED = 42
 # Options: "baseline", "awareness", "contrastive", "counterfactual", "selfhelp"
 MITIGATIONS_TO_RUN = [
     "baseline",
-    "awareness",
-    "contrastive",
-    "counterfactual",
-    "selfhelp",
+    "single_selfhelp",
+    "multi_selfhelp",
+    "no_debias_agent",
 ]
 
 # ─────────────────────────────────────────────────────────────────────────────

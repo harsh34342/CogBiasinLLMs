@@ -19,9 +19,11 @@ Metric: delta in admission rate between admit-frame and reject-frame conditions.
 import logging
 from typing import List, Dict, Optional
 
-from data.student_profiles import StudentProfile
+from student_profiles import StudentProfile
 
 logger = logging.getLogger(__name__)
+
+MIN_PARSE_SUCCESS_RATE = 0.95
 
 
 # ── Prompt templates (matching paper Table 1) ─────────────────────────────────
@@ -76,11 +78,13 @@ class FramingExperiment:
         self,
         profiles: List[StudentProfile],
         mitigation: str = "baseline",
+        min_parse_success_rate: float = MIN_PARSE_SUCCESS_RATE,
     ) -> Dict:
         """
         Run framing bias experiment across all profiles and framings.
 
-        mitigation: "baseline" | "awareness" | "contrastive" | "counterfactual" | "selfhelp"
+        mitigation: "baseline" | "awareness" | "contrastive" | "counterfactual" |
+                "selfhelp" | "single_selfhelp" | "multi_selfhelp" | "no_debias_agent"
 
         Returns dict with per-student decisions and aggregate bias metrics.
         """
@@ -90,6 +94,8 @@ class FramingExperiment:
         admit_frame_decisions = []
         reject_frame_decisions = []
         neutral_decisions = []
+        total_calls = 0
+        parse_failures = 0
 
         for idx, profile in enumerate(profiles):
             student_text = profile.to_text()
@@ -106,9 +112,7 @@ class FramingExperiment:
                     student_text, framing, extra_instruction
                 )
 
-                # Self-help: ask debiasing agent to clean the prompt first
-                if mitigation == "selfhelp" and self.debiasing_agent:
-                    prompt_text = self.debiasing_agent.debias_prompt(prompt_text)
+                prompt_text = self._apply_prompt_mitigation(prompt_text, mitigation)
 
                 # Build full model prompt
                 prompt = self.decision_agent.format_chat_prompt(
@@ -116,11 +120,16 @@ class FramingExperiment:
                     user=prompt_text,
                 )
 
-                raw = self.decision_agent.generate(prompt)
+                raw = self.decision_agent.generate_decision(prompt)
                 decision = self.decision_agent.extract_decision(raw)
+                parse_ok = decision in ("admit", "reject")
+                total_calls += 1
+                if not parse_ok:
+                    parse_failures += 1
 
                 row[f"raw_{framing}"] = raw
                 row[f"decision_{framing}"] = decision
+                row[f"parse_ok_{framing}"] = parse_ok
 
                 logger.debug(
                     f"  framing={framing!r}: decision={decision!r} | raw={raw[:50]!r}"
@@ -149,6 +158,21 @@ class FramingExperiment:
                 and admit_frame_decisions[i] != reject_frame_decisions[i])
         )
 
+        parse_success_rate = (
+            (total_calls - parse_failures) / total_calls if total_calls else 0.0
+        )
+        parse_quality_pass = parse_success_rate >= min_parse_success_rate
+
+        if not parse_quality_pass:
+            logger.warning(
+                "Low decision parse success for framing [%s]: %.2f%% (%d/%d parsed). "
+                "Metrics may be unreliable.",
+                mitigation,
+                parse_success_rate * 100,
+                total_calls - parse_failures,
+                total_calls,
+            )
+
         # ── Optional evaluator analysis ──────────────────────────────────────
         evaluator_analysis = None
         if self.evaluator_agent and n_inconsistent > 0:
@@ -167,9 +191,23 @@ class FramingExperiment:
             "admit_rate_neutral": admit_rate_neutral,
             "delta": delta,
             "n_inconsistent": n_inconsistent,
+            "total_calls": total_calls,
+            "parse_failures": parse_failures,
+            "parse_success_rate": parse_success_rate,
+            "parse_quality_pass": parse_quality_pass,
             "per_student": per_student_results,
             "evaluator_analysis": evaluator_analysis,
         }
+
+    def _apply_prompt_mitigation(self, prompt_text: str, mitigation: str) -> str:
+        """Apply mitigation-specific prompt rewriting before decision generation."""
+        if mitigation in ("selfhelp", "multi_selfhelp") and self.debiasing_agent:
+            return self.debiasing_agent.debias_prompt(prompt_text)
+        if mitigation == "single_selfhelp" and hasattr(self.decision_agent, "self_rewrite_prompt"):
+            return self.decision_agent.self_rewrite_prompt(prompt_text)
+        if mitigation == "no_debias_agent":
+            return prompt_text
+        return prompt_text
 
     # ── Helpers ───────────────────────────────────────────────────────────────
 
@@ -184,6 +222,9 @@ class FramingExperiment:
         """Return the extra instruction string for the chosen mitigation strategy."""
         if mitigation == "awareness":
             return "Be mindful to not be biased by cognitive bias."
+
+        if mitigation == "awareness_prompt":
+            return "Before deciding, explicitly check whether wording is affecting your judgment."
 
         if mitigation == "contrastive":
             return (

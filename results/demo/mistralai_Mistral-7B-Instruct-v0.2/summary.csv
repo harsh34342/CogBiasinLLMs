@@ -1,0 +1,2 @@
+model,bias,method,metric_name,metric_value,tokens_used,num_calls,runtime_seconds
+mistralai/Mistral-7B-Instruct-v0.2,framing,baseline,delta,0.0,0,0,0.0

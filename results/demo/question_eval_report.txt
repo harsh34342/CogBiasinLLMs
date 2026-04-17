@@ -1,0 +1,27 @@
+=== DIRECT QUESTION OUTPUT ===
+Q1 (multi-agent vs single-agent self-help): INCONCLUSIVE (all ties)
+Q2 (architecture ablation, multi vs no_debias): INCONCLUSIVE (all ties)
+
+Q1 detail
+- anchoring: multi_selfhelp=0.000000, single_selfhelp=0.000000 (higher is better) -> tie
+- framing: |multi_selfhelp|=0.000000, |single_selfhelp|=0.000000 (lower is better) -> tie
+
+Q2 detail
+- anchoring: multi_selfhelp=0.000000, no_debias_agent=0.000000 (higher is better) -> tie
+- framing: |multi_selfhelp|=0.000000, |no_debias_agent|=0.000000 (lower is better) -> tie
+
+=== DIAGNOSTICS ===
+- [signal] anchoring: all metric values identical (0.000000)
+- [signal] framing: all metric values identical (0.000000)
+- [signal] all metric values are 0.0 -> likely weak model signal or parse-limited outputs
+
+=== COST SNAPSHOT (mean by bias/method) ===
+     bias          method  tokens_used  num_calls  runtime_seconds
+anchoring  multi_selfhelp      13203.0       25.0         198.6297
+anchoring single_selfhelp       6963.0       24.0          22.1400
+anchoring        baseline       4817.0       12.0          20.5849
+anchoring no_debias_agent       4817.0       12.0          14.5514
+  framing  multi_selfhelp      13833.0       36.0          74.0623
+  framing single_selfhelp       7135.0       36.0          23.3131
+  framing        baseline       3954.0       18.0          12.7425
+  framing no_debias_agent       3954.0       18.0          11.8026

@@ -9,7 +9,7 @@ Mirrors the role described in BiasBuster Table 1.
 """
 
 from typing import List, Optional, Tuple
-from agents.base_agent import BaseAgent
+from base_agent import BaseAgent
 
 
 SYSTEM_PROMPT = (
@@ -71,9 +71,31 @@ class DecisionAgent(BaseAgent):
             user=user_content,
         )
 
-        raw = self.generate(prompt)
+        raw = self.generate_decision(prompt)
         decision = self.extract_decision(raw)
         return raw, decision
+
+    def self_rewrite_prompt(self, prompt: str) -> str:
+        """
+        Single-agent self-help: use the same decision model to rewrite a prompt
+        into a less bias-prone version before making a decision.
+        """
+        rewrite_instruction = (
+            "Rewrite the prompt below to reduce cognitive bias while preserving all "
+            "factual student information. Return only the revised prompt text.\n\n"
+            "[start]\n"
+            f"{prompt}\n"
+            "[end]"
+        )
+        rewrite_prompt = self.format_chat_prompt(
+            system=(
+                "You are an assistant that rewrites admissions prompts to reduce "
+                "cognitive bias."
+            ),
+            user=rewrite_instruction,
+        )
+        rewritten = self.generate(rewrite_prompt).strip()
+        return rewritten if rewritten else prompt
 
     # ── Sequential decision (anchoring) ───────────────────────────────────────
 
@@ -116,7 +138,7 @@ class DecisionAgent(BaseAgent):
                 user=user_content,
             )
 
-            raw = self.generate(prompt)
+            raw = self.generate_decision(prompt)
             decision = self.extract_decision(raw)
             decision_str = decision if decision else "reject"  # default fallback
 
