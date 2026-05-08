@@ -263,11 +263,12 @@ def main():
     # ── Override config from CLI ───────────────────────────────────────────────
     model_name = args.model or config.MODEL_NAME
     if args.quick:
-        model_name = "facebook/opt-125m"
+        if not args.model:
+            model_name = "facebook/opt-125m"
         config.NUM_STUDENTS_ANCHORING = 4
         config.NUM_ORDER_PERMUTATIONS = 3
         config.NUM_STUDENTS_FRAMING   = 6
-        logger.info("QUICK MODE: using opt-125m, minimal students")
+        logger.info(f"QUICK MODE: model={model_name}, minimal students")
 
     if args.hf_token:
         config.HF_TOKEN = args.hf_token
